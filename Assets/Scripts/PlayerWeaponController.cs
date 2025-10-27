@@ -51,13 +51,15 @@ public class PlayerWeaponController : MonoBehaviour
             if (weaponSlots[i] == null)
             {
                 WeaponController weaponClone = Instantiate(p_weaponPrefab, weaponParentSocket);
-                
+                weaponClone.owner = gameObject;
                 // Usar posición MUNDIAL en lugar de posición local
                 weaponClone.transform.position = defaultWeaponPosition.position;
                 weaponClone.transform.rotation = defaultWeaponPosition.rotation;
                 
                 weaponClone.gameObject.SetActive(false);
                 weaponSlots[i] = weaponClone;
+
+                
                 return;
             }
         }
@@ -75,7 +77,7 @@ public class PlayerWeaponController : MonoBehaviour
 
         weaponSlots[p_weaponIndex].gameObject.SetActive(true);
         activeWeaponIndex = p_weaponIndex;
-        
+        eventManager.current.newGunEvent.Invoke();
         // Reforzar posición al cambiar de arma
         weaponSlots[p_weaponIndex].transform.position = defaultWeaponPosition.position;
         weaponSlots[p_weaponIndex].transform.rotation = defaultWeaponPosition.rotation;

@@ -60,8 +60,8 @@ public class PlayerController : MonoBehaviour
     
     private void Mirar()
     {
-        rotacionInput.x = Input.GetAxis("Mouse X") * sensibilidadMouse * Time.deltaTime;
-        rotacionInput.y = Input.GetAxis("Mouse Y") * sensibilidadMouse * Time.deltaTime;
+        rotacionInput.x = Input.GetAxis("Mouse X") * sensibilidadMouse; //* Time.deltaTime;
+        rotacionInput.y = Input.GetAxis("Mouse Y") * sensibilidadMouse; //* Time.deltaTime;
 
         camaraVertical += rotacionInput.y;
         camaraVertical = Mathf.Clamp(camaraVertical, -70, 70);
