@@ -24,16 +24,17 @@ public class PlayerWeaponController : MonoBehaviour
         foreach(WeaponController startingWeapon in startingWeapons)
         {
             AddWeapon(startingWeapon);
+            //Debug.Log("Added weapon: " + startingWeapon.name);
         }
-
-        if (weaponSlots[0] != null) SwitchWeapon(0);
+        SwitchWeapon();
+        //if (weaponSlots[0] != null) SwitchWeapon();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SwitchWeapon(0);
+            SwitchWeapon();
         }
         
         // DEBUG: Tecla para probar posiciones
@@ -65,21 +66,26 @@ public class PlayerWeaponController : MonoBehaviour
         }
     }
     
-    private void SwitchWeapon(int p_weaponIndex)
+    private void SwitchWeapon()
     {
-        if (p_weaponIndex < 0 || p_weaponIndex >= weaponSlots.Length || weaponSlots[p_weaponIndex] == null)
+        int temp_index = (activeWeaponIndex + 1) % weaponSlots.Length;
+        if (weaponSlots[temp_index] == null)
+        {
             return;
+        }
+        foreach (WeaponController weapon in weaponSlots)
+        {
+            if (weapon != null)
+            {
+                weapon.gameObject.SetActive(false);
+            }
+        }
 
-        if (p_weaponIndex == activeWeaponIndex) return;
-
-        if (activeWeaponIndex >= 0 && weaponSlots[activeWeaponIndex] != null)
-            weaponSlots[activeWeaponIndex].gameObject.SetActive(false);
-
-        weaponSlots[p_weaponIndex].gameObject.SetActive(true);
-        activeWeaponIndex = p_weaponIndex;
+        weaponSlots[temp_index].gameObject.SetActive(true);
+        activeWeaponIndex = temp_index;
         eventManager.current.newGunEvent.Invoke();
         // Reforzar posición al cambiar de arma
-        weaponSlots[p_weaponIndex].transform.position = defaultWeaponPosition.position;
-        weaponSlots[p_weaponIndex].transform.rotation = defaultWeaponPosition.rotation;
+        weaponSlots[temp_index].transform.position = defaultWeaponPosition.position;
+        weaponSlots[temp_index].transform.rotation = defaultWeaponPosition.rotation;
     }
 }

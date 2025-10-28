@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponController
   startingWeapons:
   - {fileID: 6200428807660935606, guid: 7508c454de781234293b30d07ac86ca1, type: 3}
-  - {fileID: 1404225015524170056, guid: 08cede4a618cd6e63882fdc39d9a5f71, type: 3}
+  - {fileID: 8123988963723345035, guid: 3cbae2310164355a396f183dd6c63016, type: 3}
   weaponParentSocket: {fileID: 2014278301}
   defaultWeaponPosition: {fileID: 1583889634}
   aimingPosition: {fileID: 4947983}

@@ -15,7 +15,7 @@ public class WeaponController : MonoBehaviour
     [Header("Parametros de disparo")]
     public float fireRange  = 200;
     public float retroceso = 4f; //fuerza de retroceso del arma
-    public float cadenciaDisparo = 0.4f; //tiempo entre disparos
+    public float cadenciaDisparo = 0.2f; //tiempo entre disparos
 
     [Header("Munición")]
     public int municionMaxima = 8;
