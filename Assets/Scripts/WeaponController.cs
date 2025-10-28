@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
+public enum ShotType
+{
+    Manual,
+    Automatic
+}
 public class WeaponController : MonoBehaviour
 {
     [Header("Referencias")]
@@ -13,9 +18,10 @@ public class WeaponController : MonoBehaviour
     public GameObject bulletHolePrefab;
 
     [Header("Parametros de disparo")]
-    public float fireRange  = 200;
+    public float fireRange = 200;
     public float retroceso = 4f; //fuerza de retroceso del arma
     public float cadenciaDisparo = 0.2f; //tiempo entre disparos
+    public ShotType shotType = ShotType.Manual;
 
     [Header("Munición")]
     public int municionMaxima = 8;
@@ -29,33 +35,41 @@ public class WeaponController : MonoBehaviour
 
     private Transform cameraPlayerTransform;
     public GameObject owner { get; set; }
-    private void Awake(){
+    private void Awake()
+    {
         municionActual = municionMaxima;
         eventManager.current.onAmmoChanged.Invoke(municionActual, municionMaxima);
     }
-    private void Start(){
+    private void Start()
+    {
         cameraPlayerTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
-    private void Update(){
-        if (Input.GetButtonDown("Fire1"))
+    private void Update()
+    {
+        if (shotType == ShotType.Manual && Input.GetButtonDown("Fire1"))
         {
             TryShoot();
-
         }
+
+        else if (shotType == ShotType.Automatic && Input.GetButton("Fire1"))
+        {
+            TryShoot();
+        }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(ReloadCoroutine());
         }
-        
+
 
         transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * 5f);
     }
     private bool TryShoot()
     {
-       if(tiempoUltimoDisparo + cadenciaDisparo <= Time.time )
+        if (tiempoUltimoDisparo + cadenciaDisparo <= Time.time)
         {
-            if(municionActual > 0)
+            if (municionActual > 0)
             {
                 HandleShoot();
                 municionActual--;
@@ -68,8 +82,8 @@ public class WeaponController : MonoBehaviour
     private void HandleShoot()
     {
         GameObject flashClone = Instantiate(efectoFlash, boquillaArma.position, Quaternion.Euler(boquillaArma.forward), transform);
-            Destroy(flashClone, 0.1f);
-            AddRecoil();
+        Destroy(flashClone, 0.1f);
+        AddRecoil();
         RaycastHit[] hits;
         hits = Physics.RaycastAll(cameraPlayerTransform.position, cameraPlayerTransform.forward, fireRange, hittableLayers);
         foreach (RaycastHit hitInfo in hits)

@@ -65,10 +65,11 @@ MonoBehaviour:
   bulletHolePrefab: {fileID: 6376489203078777107, guid: 0f52bfab3e3b26c43b364a04c5195c39, type: 3}
   fireRange: 200
   retroceso: 4
-  cadenciaDisparo: 0.2
-  municionMaxima: 8
-  municionActual: 0
-  tiempoRecarga: 2
+  cadenciaDisparo: 0.1
+  shotType: 1
+  municionMaxima: 30
+  municionActual: 30
+  tiempoRecarga: 3
   efectoFlash: {fileID: 1214320096124798210, guid: 9a601704fc27b1449a575616af39a2d1, type: 3}
 --- !u!1 &5881519064438828506
 GameObject:
@@ -201,6 +202,7 @@ MonoBehaviour:
   fireRange: 200
   retroceso: 4
   cadenciaDisparo: 0.2
+  shotType: 0
   municionMaxima: 8
   municionActual: 0
   tiempoRecarga: 2
