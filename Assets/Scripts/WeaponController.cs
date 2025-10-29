@@ -28,7 +28,10 @@ public class WeaponController : MonoBehaviour
     public int municionActual;
     private float tiempoUltimoDisparo = Mathf.NegativeInfinity;
     public float tiempoRecarga = 2f;
-
+    public AudioSource audioSource;
+    public AudioClip disparoClip;
+    public AudioClip automaticDisparoClip;
+    public AudioClip recargaClip;
 
     [Header("Efectos")]
     public GameObject efectoFlash;
@@ -72,6 +75,17 @@ public class WeaponController : MonoBehaviour
             if (municionActual > 0)
             {
                 HandleShoot();
+
+                AudioClip clipToPlay = null;
+                if (shotType == ShotType.Manual)
+                    clipToPlay = disparoClip;
+                else if (shotType == ShotType.Automatic)
+                    clipToPlay = automaticDisparoClip;
+
+                
+                audioSource.PlayOneShot(clipToPlay);
+
+               // audioSource.PlayOneShot(disparoClip);
                 municionActual--;
                 eventManager.current.onAmmoChanged.Invoke(municionActual, municionMaxima);
                 return true;
@@ -107,8 +121,10 @@ public class WeaponController : MonoBehaviour
     IEnumerator ReloadCoroutine()
     {
         // Aquí puedes agregar animaciones o efectos de recarga si lo deseas
+        audioSource.PlayOneShot(recargaClip);
         yield return new WaitForSeconds(tiempoRecarga);
         municionActual = municionMaxima;
+        
         eventManager.current.onAmmoChanged.Invoke(municionActual, municionMaxima);
     }
 
