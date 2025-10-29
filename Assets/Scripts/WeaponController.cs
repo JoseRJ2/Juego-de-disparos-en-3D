@@ -13,6 +13,7 @@ public class WeaponController : MonoBehaviour
     [Header("Referencias")]
     public Transform boquillaArma;
 
+
     [Header("General")]
     public LayerMask hittableLayers;
     public GameObject bulletHolePrefab;
@@ -102,8 +103,21 @@ public class WeaponController : MonoBehaviour
         hits = Physics.RaycastAll(cameraPlayerTransform.position, cameraPlayerTransform.forward, fireRange, hittableLayers);
         foreach (RaycastHit hitInfo in hits)
         {
-            if (hitInfo.collider.gameObject != owner)
+               GameObject hitObject = hitInfo.collider.gameObject;
+            if (hitObject != owner)
             {
+                 if (hitObject.CompareTag("Ladron"))
+        {
+            Debug.Log("💥 Le diste al ladrón!");
+
+            // Ejemplo: Si tiene un script de salud o controlador
+            ladronController ladron = hitObject.GetComponent<ladronController>();
+            if (ladron != null)
+            {
+                ladron.RecibirDisparo();
+            }
+        }
+
                 GameObject bulletHoleClone = Instantiate(bulletHolePrefab, hitInfo.point + hitInfo.normal * 0.01f, Quaternion.LookRotation(hitInfo.normal));
                 Destroy(bulletHoleClone, 4f);
             }
