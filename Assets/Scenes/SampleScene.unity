@@ -589,7 +589,7 @@ Transform:
   m_GameObject: {fileID: 408698006}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10.57}
+  m_LocalPosition: {x: 5.32, y: 0, z: 10.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -996,7 +996,7 @@ Transform:
   m_GameObject: {fileID: 546470591}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.41, y: 0, z: -5.5}
+  m_LocalPosition: {x: -5.31, y: 0, z: -5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1049,7 +1049,7 @@ Transform:
   m_GameObject: {fileID: 721808273}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.23, y: 0, z: -7.17}
+  m_LocalPosition: {x: -6.23, y: 0, z: 9.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1346,7 +1346,7 @@ MonoBehaviour:
   gravedad: -9.81
   salto: 1.9
   sensibilidadMouse: 3
-  WalkSpeed: 1
+  WalkSpeed: 3
   Correr: 10
 --- !u!114 &1271738534
 MonoBehaviour:
@@ -1807,7 +1807,7 @@ MonoBehaviour:
   Anim: {fileID: 1836005999}
   caminarAnim: mixamo.com
   AI: {fileID: 1836006000}
-  velocidadMovimiento: 3.5
+  velocidadMovimiento: 1.5
   objetivos:
   - {fileID: 1925099144}
   - {fileID: 408698007}
@@ -1919,11 +1919,12 @@ Animation:
   m_GameObject: {fileID: 1836005990}
   m_Enabled: 1
   serializedVersion: 4
-  m_Animation: {fileID: -203655887218126122, guid: 62d013caeffc0f6e38e579e69ee0c975, type: 3}
+  m_Animation: {fileID: -203655887218126122, guid: f772efecd2420f6b38a1ca8388673c4b, type: 3}
   m_Animations:
   - {fileID: -203655887218126122, guid: 62d013caeffc0f6e38e579e69ee0c975, type: 3}
+  - {fileID: -203655887218126122, guid: f772efecd2420f6b38a1ca8388673c4b, type: 3}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
@@ -1975,7 +1976,7 @@ Transform:
   m_GameObject: {fileID: 1925099143}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.46, y: 0, z: -7.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -10,59 +10,54 @@ public class ladronController : MonoBehaviour
 
     [Header("Animación")]
     public Animation Anim;
-    public string caminarAnim; // nombre del clip de caminar
-    //public string idleAnim;    // opcional: nombre del clip de idle
+    public string caminarAnim;
 
     [Header("Movimiento (NavMesh)")]
     public NavMeshAgent AI;
     public float velocidadMovimiento = 3.5f;
     public Transform[] objetivos;
-    Transform objetivo;
-
+    private Transform objetivo;
     private float distanciaObjetivo = 1.5f;
 
     void Start()
     {
         objetivo = objetivos[Random.Range(0, objetivos.Length)];
-        //AI.speed = velocidadMovimiento;
+        AI.speed = velocidadMovimiento;
 
-        
-        Anim.Play(caminarAnim);
+        // Configurar y reproducir animación de caminar en bucle
+        Anim[caminarAnim].wrapMode = WrapMode.Loop;
+        Anim.CrossFade(caminarAnim, 0.15f);
     }
 
     void Update()
     {
-        
-
         distanciaObjetivo = Vector3.Distance(transform.position, objetivo.position);
 
-        // Cambiar objetivo al llegar
         if (distanciaObjetivo < 1.5f)
         {
             objetivo = objetivos[Random.Range(0, objetivos.Length)];
         }
 
-        // Actualizar destino
         AI.destination = objetivo.position;
 
-        // 💡 Detectar si se está moviendo
-        AI.speed = velocidadMovimiento;
+        // Asegurar que siga animando (por seguridad)
+        if (!Anim.isPlaying)
+        {
+            Anim.CrossFade(caminarAnim, 0.1f);
+        }
     }
 
+    public void RecibirDisparo()
+    {
+        Debug.Log("¡El ladrón ha sido alcanzado por un disparo!");
+        audioSource.volume = 2f;
+        audioSource.PlayOneShot(deathClip);
+        StartCoroutine(DestruirDespuesDeSonido());
+    }
 
-public void RecibirDisparo()
-{
-    Debug.Log("¡El ladrón ha sido alcanzado por un disparo!");
-    audioSource.volume = 2f;
-    audioSource.PlayOneShot(deathClip);
-
-    StartCoroutine(DestruirDespuesDeSonido());
-}
-
-private IEnumerator DestruirDespuesDeSonido()
-{
-    // Esperar la duración del clip
-    yield return new WaitForSeconds(deathClip.length);
-    //Destroy(gameObject);
-}
+    private IEnumerator DestruirDespuesDeSonido()
+    {
+        yield return new WaitForSeconds(deathClip.length);
+        //Destroy(gameObject);
+    }
 }
