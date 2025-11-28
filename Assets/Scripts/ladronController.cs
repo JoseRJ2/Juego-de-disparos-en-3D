@@ -205,6 +205,11 @@ public class ladronController : MonoBehaviour
     private float distanciaObjetivo = 1.5f;
     private bool muerto = false;
 
+    void Awake()
+    {
+        EnemyManager.instance.RegistrarEnemigo();
+    }
+
     void Start()
     {
         objetivo = objetivos[Random.Range(0, objetivos.Length)];
@@ -268,6 +273,8 @@ public class ladronController : MonoBehaviour
             deathClip != null ? deathClip.length : 0f,
             (Anim[muerteAnim] != null) ? Anim[muerteAnim].length : 0f
         );
+
+        EnemyManager.instance.EnemigoMuerto();
 
         StartCoroutine(DestruirDespuesDe(delay));
     }
