@@ -180,7 +180,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b95352e3568f4b593afa4170db1eefdd, type: 2}
   m_sharedMaterial: {fileID: -1517133613483075784, guid: b95352e3568f4b593afa4170db1eefdd, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -1517133613483075784, guid: b95352e3568f4b593afa4170db1eefdd, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
