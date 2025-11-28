@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update(){
+        if (PausarJuego.juegoPausado)
+            return;
+
         Move();
         Mirar();
     }
