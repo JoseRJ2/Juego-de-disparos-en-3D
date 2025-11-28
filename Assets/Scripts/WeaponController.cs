@@ -51,6 +51,9 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
+        if (PausarJuego.juegoPausado)
+            return;
+
         if (shotType == ShotType.Manual && Input.GetButtonDown("Fire1"))
         {
             TryShoot();
